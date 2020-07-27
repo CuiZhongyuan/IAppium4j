@@ -13,4 +13,4 @@ buildNumber.properties
 *.iml
 *.log
 *.log.gz
-
+com.appuitest
