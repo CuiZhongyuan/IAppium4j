@@ -131,5 +131,6 @@
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: cn.hutool:hutool-all:5.3.5" level="project" />
+    <orderEntry type="library" name="selenium-server-standalone-2.44.0" level="project" />
   </component>
 </module>
