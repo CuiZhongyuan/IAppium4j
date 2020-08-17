@@ -9,7 +9,7 @@ public class RunCasesAll {
  * */
    @Test
     public void runCases(){
-       //显示iappium
+       //打印iappium
         WordartDisplayer.display();
         //执行测试用例入口
         BaseTestngInit baseTestngInit = new BaseTestngInit();
