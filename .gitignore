@@ -13,7 +13,7 @@ buildNumber.properties
 *.log.gz
 com.appuitest
 target/
-.idea/
-test-output/
-allure-results/
-com.iappium/
+/.idea/
+/.test-output/
+/.allure-results/
+/.com.iappium/
