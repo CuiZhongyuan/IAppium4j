@@ -14,3 +14,6 @@ buildNumber.properties
 com.appuitest
 target/
 .idea/
+test-output/
+allure-results/
+com.iappium/
