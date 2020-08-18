@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test
 public class TestCase {
 
-    //测试用例维护
+    //测试示例用例维护
     @Test
     public void cases()  {
         OpenMiniHandle openMiniHandle = new OpenMiniHandle();
