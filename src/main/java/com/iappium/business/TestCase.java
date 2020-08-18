@@ -4,6 +4,7 @@ package com.iappium.business;
 import com.iappium.handle.OpenMiniHandle;
 import org.testng.annotations.Test;
 
+
 /**
  * 业务层
  *
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 @Test
 public class TestCase {
 
-    //测试用例维护
+    //测试示例用例维护
     @Test
     public void cases()  {
         OpenMiniHandle openMiniHandle = new OpenMiniHandle();

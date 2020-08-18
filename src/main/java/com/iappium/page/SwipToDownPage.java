@@ -13,7 +13,7 @@ public class SwipToDownPage {
 
     StartAppDriverPage startAppDriverPage = new StartAppDriverPage();
     BaseApp baseApp = new BaseApp();
-    //调取下滑手势方法
+    //调取baseAPP下滑手势方法
     public void swipToDown(){
         baseApp.swipeToDown(startAppDriverPage.start());
     }
