@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
 
@@ -36,8 +37,6 @@ public class BaseApp {
     protected WebDriverWait wait;
 
     /**
-     * 构造器
-     *
      * @param driver 驱动
      */
     BaseAndroidDriver baseAndroidDriver;
@@ -51,6 +50,7 @@ public class BaseApp {
         this.baseAndroidDriver = androidDriver;
         this.baseConfig = baseConfig;
     }
+
 
 
     /*============================== 基本元素操作 ==============================*/
@@ -194,5 +194,36 @@ public class BaseApp {
         action.perform();
     }
 
+    /*=====================通过具体坐标点击操作，appium&&adb两种方式==================================*/
+    /**
+     * 通过具体坐标点击
+     */
+    public void taptest(AndroidDriver driver,int x, int y){
+        /**设置显示等待时间10s  driver=baseAndroidDriver.getDriver(baseConfig)
+        特注：显示等待与隐式等待相对，显示等待必须在每一个需要等待的元素前面进行声明，如果在规定的时间内找到元素，则直接执行，即找到元素就执行相关操作
+         */
+        wait = new WebDriverWait(driver,5);
+        //tap点击坐标，输入坐标，然后再release()释放坐标点，用perform()去执行一系列action操作
+        action = new TouchAction(driver).tap(PointOption.point(x,y)).release().perform();
+
+    }
+
+    /**
+     * 通过adb命令驱动被测设备
+     */
+    public void adbInput(String input){
+        try {
+            Process process = Runtime.getRuntime().exec(input);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            process.destroy();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     // todo : 页面中其他的最基本操作，可自行封装
+
 }
