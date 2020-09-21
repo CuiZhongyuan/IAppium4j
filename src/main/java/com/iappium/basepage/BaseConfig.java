@@ -50,9 +50,8 @@ public class BaseConfig {
     /**
      * 隐式等待时长
      */
-    private Long implicitlyWait= Long.valueOf("90");
+    private Long implicitlyWait= Long.valueOf("6");
 
     // todo : 其它配置参数可自定义
-
 
 }

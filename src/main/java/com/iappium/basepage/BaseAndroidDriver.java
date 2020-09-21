@@ -2,6 +2,7 @@ package com.iappium.basepage;
 
 
 import io.appium.java_client.android.AndroidDriver;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @date 2020/8/2 18:21
  */
+@Slf4j
 public class BaseAndroidDriver {
 
     private AndroidDriver driver;
@@ -43,10 +45,10 @@ public class BaseAndroidDriver {
 
         driver = new AndroidDriver<>(url, capabilities);
 //        隐式等待时长，贯穿全部元素，设置一次即可
-//        driver.manage().timeouts().implicitlyWait(baseConfig.getImplicitlyWait(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(baseConfig.getImplicitlyWait(), TimeUnit.SECONDS);
         //睡眠7s等待APP启动成功，需要根据自己手机的配置
         try {
-            Thread.sleep(9000);
+            Thread.sleep(10000);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -76,5 +78,16 @@ public class BaseAndroidDriver {
         }
          driver = new AndroidDriver<>(url, capabilities);
         return driver;
+    }
+
+    /**
+     * 退出驱动
+     */
+    public void closeDriver(BaseConfig baseConfig) {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+        log.info(baseConfig.getPlatformName() + "驱动已成功关闭！");
     }
 }

@@ -1,25 +1,28 @@
-package com.iappium.page;
+package com.iappium.page.element;
+
 
 import com.iappium.basepage.BaseApp;
+import com.iappium.page.data.MiniParamsData;
 import io.appium.java_client.android.AndroidDriver;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 元素层
- *
- * @author czy
+ * @author abcnull@qq.com
  * @version 1.0.0
- * @date 2020/8/1 23:26
+ * @date 2020/8/4 14:31
  */
-public class EnterMiniPage {
-
+@Slf4j
+public class EnterMiniElemnt {
     BaseApp baseApp = new BaseApp();
     //调取baseAPP下滑手势方法
     public void swipToDown(AndroidDriver driver){
         baseApp.swipeToDown(driver);
     }
+    //调用baseApp点击方法
     public void tap(AndroidDriver driver){
         //点击具体坐标
-        baseApp.taptest(driver,170,694);
+        baseApp.taptest(driver, MiniParamsData.X,MiniParamsData.Y);
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
@@ -30,6 +33,6 @@ public class EnterMiniPage {
      * 执行adb命令tap点击、text输入
      * */
     public void adbInput() {
-        baseApp.adbInput("cmd /c adb shell input tap 170 694");
+        baseApp.adbInput(MiniParamsData.ADBIPUT);
     }
 }
