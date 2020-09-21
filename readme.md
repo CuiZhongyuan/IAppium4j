@@ -10,4 +10,4 @@
 - testcase包:负责用例维护执行操作方法（操作方法数据源来自元素层的方法）
 - utils包:工具类
 
-![](https://upload-images.jianshu.io/upload_images/16753854-9cf6efdcea2f16cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://test-elf.coding.net/p/test-ci-cd/files/all/default/preview/21858633)
