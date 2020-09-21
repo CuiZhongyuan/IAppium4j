@@ -2,8 +2,10 @@ package com.iappium.basepage;
 
 
 import io.appium.java_client.android.AndroidDriver;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,14 +16,14 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @date 2020/8/2 18:21
  */
+@Slf4j
 public class BaseAndroidDriver {
-
 
     private AndroidDriver driver;
     /**
      *初始化驱动
      */
-    public AndroidDriver<WebElement> getDriver(BaseConfig baseConfig)  {
+    public AndroidDriver<WebElement> getDriver(BaseConfig baseConfig) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", baseConfig.getPlatformName());
         capabilities.setCapability("appPackage", baseConfig.getAppPackage());
@@ -42,8 +44,14 @@ public class BaseAndroidDriver {
         }
 
         driver = new AndroidDriver<>(url, capabilities);
-//        隐式等待时长
+//        隐式等待时长，贯穿全部元素，设置一次即可
         driver.manage().timeouts().implicitlyWait(baseConfig.getImplicitlyWait(), TimeUnit.SECONDS);
+        //睡眠7s等待APP启动成功，需要根据自己手机的配置
+        try {
+            Thread.sleep(10000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return driver;
     }
     /**
@@ -70,5 +78,16 @@ public class BaseAndroidDriver {
         }
          driver = new AndroidDriver<>(url, capabilities);
         return driver;
+    }
+
+    /**
+     * 退出驱动
+     */
+    public void closeDriver(BaseConfig baseConfig) {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+        log.info(baseConfig.getPlatformName() + "驱动已成功关闭！");
     }
 }
