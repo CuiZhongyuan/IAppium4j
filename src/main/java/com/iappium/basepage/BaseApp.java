@@ -78,16 +78,13 @@ public class BaseApp {
      * @return 点击的元素
      */
     public WebElement clickButton(AndroidDriver driver,By locator) {
-        String time1 = DateUtils.getCurrentTime();
+        long time1 = DateUtils.getCurrentMillisecond();
         MobileElement buttonElement = (MobileElement) locateElement(driver,locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         buttonElement.click();
-        String time2 =  DateUtils.getCurrentTime();
-        long dateUtils =  DateUtils.getBetweenMillisecond(time1,time2);
-        System.out.println(dateUtils);
+        System.out.println(DateUtils.getCurrentMillisecond()-time1);
         return buttonElement;
     }
-
     /**
      * 输入框输入数据
      *
