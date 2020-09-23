@@ -1,7 +1,9 @@
 package com.iappium.basepage;
 
 
+import com.iappium.utils.DateUtils;
 import io.appium.java_client.MobileDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
@@ -12,7 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -34,15 +38,19 @@ public class BaseApp {
     /**
      * 显示等待
      */
-    protected WebDriverWait wait;
+    protected WebDriverWait wait ;
 
     /**
      * @param driver 驱动
      */
     BaseAndroidDriver baseAndroidDriver;
-
+    /**
+     * 启动被测机参数配置
+     */
     BaseConfig baseConfig;
-
+    /**
+     * 构造方法
+     */
     public BaseApp() {
     }
 
@@ -51,8 +59,6 @@ public class BaseApp {
         this.baseConfig = baseConfig;
     }
 
-
-
     /*============================== 基本元素操作 ==============================*/
     /**
      * 通过元素定位拿到 Element 元素对象
@@ -60,7 +66,8 @@ public class BaseApp {
      * @param locator By 类型元素定位
      * @return 定位到的元素
      */
-    public WebElement locateElement(By locator) {
+    public WebElement locateElement(AndroidDriver driver,By locator) {
+        wait = new WebDriverWait(driver, 10);
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
@@ -70,10 +77,14 @@ public class BaseApp {
      * @param locator By 类型元素定位
      * @return 点击的元素
      */
-    public WebElement clickButton(By locator) {
-        WebElement buttonElement = locateElement(locator);
+    public WebElement clickButton(AndroidDriver driver,By locator) {
+        String time1 = DateUtils.getCurrentTime();
+        MobileElement buttonElement = (MobileElement) locateElement(driver,locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         buttonElement.click();
+        String time2 =  DateUtils.getCurrentTime();
+        long dateUtils =  DateUtils.getBetweenMillisecond(time1,time2);
+        System.out.println(dateUtils);
         return buttonElement;
     }
 
@@ -84,8 +95,8 @@ public class BaseApp {
      * @param content 输入的内容，支持多内容，可以键盘输入
      * @return 输入框元素
      */
-    public WebElement sendInput(By locator, CharSequence... content) {
-        WebElement inputElement = locateElement(locator);
+    public WebElement sendInput(AndroidDriver driver,By locator, CharSequence... content) {
+        WebElement inputElement = locateElement(driver,locator);
         inputElement.clear();
         inputElement.sendKeys(content);
         return inputElement;
@@ -167,8 +178,8 @@ public class BaseApp {
      *向下滑动操作
      */
     public void swipeToDown(AndroidDriver driver) {
-        int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
+        int width = driver.manage().window().getSize().width;
         TouchAction action=new TouchAction(driver).press(PointOption.point(width/2, height/4)).waitAction(WaitOptions.waitOptions(duration))
                 .moveTo(PointOption.point(width/2, height*3/4)).release();
         action.perform();
@@ -207,21 +218,33 @@ public class BaseApp {
         action = new TouchAction(driver).tap(PointOption.point(x,y)).release().perform();
 
     }
-
     /**
      * 通过adb命令驱动被测设备
      */
-    public void adbInput(String input){
+    public void adbInput(AndroidDriver driver ,String input){
         try {
             Process process = Runtime.getRuntime().exec(input);
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait = new WebDriverWait(driver,5);
             process.destroy();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    /*=====================其它操作==================================*/
+    /**
+     * 前进、后退、刷新的动作
+     */
+    public void operation(AndroidDriver driver,String operation ){
+
+        if (operation.equals("forward")){
+            // 前进
+            driver.navigate().forward();
+        }else if (operation.equals("back")){
+            // 后退
+            driver.navigate().back();
+        }else {
+            // 刷新
+            driver.navigate().refresh();
         }
     }
     // todo : 页面中其他的最基本操作，可自行封装

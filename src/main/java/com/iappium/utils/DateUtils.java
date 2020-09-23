@@ -262,6 +262,18 @@ public class DateUtils extends DateUtil {
         Date date2 = parse(time2);
         return between(date1, date2, DateUnit.SECOND);
     }
+    /**
+     * 相差时间毫秒
+     *
+     * @param time1
+     * @param time2
+     * @return
+     */
+    public static long getBetweenMillisecond(String time1, String time2) {
+        Date date1 = parse(time1);
+        Date date2 = parse(time2);
+        return between(date1, date2, DateUnit.MS);
+    }
 
     /**
      * 毫秒数转换为"yyyy-MM-dd HH:mm:ss"格式时间

@@ -35,6 +35,7 @@ public class BaseAndroidDriver {
         capabilities.setCapability("unicodeKeyboard", "True");
         // 不重新签名apk
         capabilities.setCapability("resetKeyboard", "True");
+        capabilities.setCapability("chromedriverExecutable",baseConfig.getChromeDriverPath());
         // 通过本地 appium 服务开启 driver
         URL url = null;
         try {
@@ -42,14 +43,12 @@ public class BaseAndroidDriver {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
         driver = new AndroidDriver<>(url, capabilities);
-//        隐式等待时长，贯穿全部元素，设置一次即可
+        //隐式等待时长，贯穿全部元素，设置一次即可
         driver.manage().timeouts().implicitlyWait(baseConfig.getImplicitlyWait(), TimeUnit.SECONDS);
-        //睡眠7s等待APP启动成功，需要根据自己手机的配置
         try {
-            Thread.sleep(10000);
-        }catch (Exception e){
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return driver;
