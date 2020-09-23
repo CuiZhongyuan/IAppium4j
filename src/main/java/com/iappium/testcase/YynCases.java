@@ -12,15 +12,10 @@ public class YynCases extends BaseTest {
      * 操作层
      */
     EnterMiniElemnt enterMiniElemnt = new EnterMiniElemnt();
-    //进入被测小程序
+    //进入被测APP
     @Test
     public void enterMini() {
-        //启动微信APP并下滑窗口
-//        enterMiniElemnt.swipToDown(driver);
+        //启动游云南APP并点击关闭广告弹框
         enterMiniElemnt.xpath(driver);
-        //点击特定小程序
-//        enterMiniElemnt.tap(driver);
-        //点击最美云南
-//        enterMiniElemnt.xpath(driver);
     }
 }
