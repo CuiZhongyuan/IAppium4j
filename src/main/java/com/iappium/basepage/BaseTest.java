@@ -3,6 +3,7 @@ package com.iappium.basepage;
 import com.iappium.utils.WordartDisplayer;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
@@ -48,10 +49,9 @@ public class BaseTest {
     /**
      * 执行一个测试用例之后执行
      */
-//    @AfterTest(alwaysRun = true)
-    public void afterTest() throws InterruptedException {
-        // 驱动退出关闭浏览器
-//        Thread.sleep(10000);
+    @AfterTest(alwaysRun = true)
+    public void afterTest() {
+//        driver.quit();
         // todo : 其他工具的释放操作（看需要）
     }
 }
