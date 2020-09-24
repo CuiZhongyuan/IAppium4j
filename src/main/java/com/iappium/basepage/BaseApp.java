@@ -8,7 +8,10 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,6 +28,7 @@ import java.util.Set;
  * @version 1.0.0
  * @date 2020/8/1 23:28
  */
+@Slf4j
 public class BaseApp {
     /**
      * 持续时间，单位秒
@@ -67,23 +71,36 @@ public class BaseApp {
      * @return 定位到的元素
      */
     public WebElement locateElement(AndroidDriver driver,By locator) {
-        wait = new WebDriverWait(driver, 10);
-        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        try {
+            wait = new WebDriverWait(driver, 10);
+            return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        }catch (NoSuchElementException | TimeoutException e) {
+            System.out.println("================当前页面未捕获该元素，继续执行用例==================");
+        }
+        return null;
     }
 
     /**
      * 点击元素
      *
-     * @param locator By 类型元素定位
+     * @param locator By 类型元素定位,做弹框或元素异常后接着往下执行
      * @return 点击的元素
      */
     public WebElement clickButton(AndroidDriver driver,By locator) {
-        long time1 = DateUtils.getCurrentMillisecond();
-        MobileElement buttonElement = (MobileElement) locateElement(driver,locator);
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-        buttonElement.click();
-        System.out.println(DateUtils.getCurrentMillisecond()-time1);
-        return buttonElement;
+        try {
+            long time1 = DateUtils.getCurrentMillisecond();
+            MobileElement buttonElement = (MobileElement) locateElement(driver,locator);
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+            if (buttonElement.isEnabled()){
+                buttonElement.click();
+                log.info("该点击事件耗时时间（ms）："+(DateUtils.getCurrentMillisecond()-time1));
+                return buttonElement;
+            }
+        } catch (NoSuchElementException | TimeoutException e) {
+            System.out.println("================当前页面未捕获该元素，继续执行用例==================");
+        }
+        return null;
+//       System.out.println("改点击事件耗时时间（ms）："+(DateUtils.getCurrentMillisecond()-time1));
     }
     /**
      * 输入框输入数据

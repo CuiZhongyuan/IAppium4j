@@ -51,7 +51,7 @@ public class BaseTest {
      */
     @AfterTest(alwaysRun = true)
     public void afterTest() {
-//        driver.quit();
+        driver.quit();
         // todo : 其他工具的释放操作（看需要）
     }
 }
