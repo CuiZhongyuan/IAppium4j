@@ -3,7 +3,7 @@ package com.iappium.utils;
 /**
  * 艺术字展示
  *
- * @author abcnull@qq.com
+ * @author czy
  * @version 1.0.0
  * @date 2020/7/30 13:46
  */

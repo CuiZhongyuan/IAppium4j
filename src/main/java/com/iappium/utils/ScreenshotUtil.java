@@ -3,7 +3,7 @@ package com.iappium.utils;
 /**
  * 截图工具类
  *
- * @author abcnull@qq.com
+ * @author czy
  * @version 1.0.0
  * @date 2020/8/1 23:30
  */
