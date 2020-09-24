@@ -3,7 +3,7 @@ package com.iappium.exception;
 /**
  * 自定义异常：platformName 有问题
  *
- * @author abcnull@qq.com
+ * @author czy
  * @version 1.0.0
  * @date 2020/8/3 23:13
  */
