@@ -9,7 +9,7 @@ import org.testng.TestListenerAdapter;
 /**
  * 测试日志监听器
  *
- * @author abcnull
+ * @author czy
  * @version 1.0.0
  * @date 2019/9/9
  */
@@ -53,13 +53,13 @@ public class TestLogListener extends TestListenerAdapter {
      *
      * @param iTestResult ITestResult
      */
-    @Override
-    public void onTestFailure(ITestResult iTestResult) {
-        super.onTestFailure(iTestResult);
-        log.error(String.format("========%s.%s测试失败,失败原因如下：\n%s========", iTestResult.getInstanceName(), iTestResult.getName(), iTestResult.getThrowable()));
-        // 失败时候抛出异常进行截图
-        ScreenshotUtil.capture(iTestResult);
-    }
+//    @Override
+//    public void onTestFailure(ITestResult iTestResult) {
+//        super.onTestFailure(iTestResult);
+//        log.error(String.format("========%s.%s测试失败,失败原因如下：\n%s========", iTestResult.getInstanceName(), iTestResult.getName(), iTestResult.getThrowable()));
+//        // 失败时候抛出异常进行截图
+//        ScreenshotUtil.snapshot();
+//    }
 
     /**
      * 测试跳过

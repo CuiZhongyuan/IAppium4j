@@ -12,7 +12,7 @@ import java.util.HashMap;
  * 优先级监听器
  * 使得 xml 中 include 标签依 class 标签分隔之后再按照优先级排序，不会将所有 class 标签中 include 标签汇总排序
  *
- * @author abcnull
+ * @author czy
  * @version 1.0.0
  * @date 2019/9/9
  */

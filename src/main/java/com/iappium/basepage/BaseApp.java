@@ -2,6 +2,7 @@ package com.iappium.basepage;
 
 
 import com.iappium.utils.DateUtils;
+import com.iappium.utils.ScreenshotUtil;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -9,12 +10,14 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -97,7 +100,8 @@ public class BaseApp {
                 return buttonElement;
             }
         } catch (NoSuchElementException | TimeoutException e) {
-            System.out.println("================当前页面未捕获该元素，继续执行用例==================");
+            System.out.println("================当前页面未捕获该元素，截图保留>>>>继续执行用例==================");
+            ScreenshotUtil.snapshot(driver);
         }
         return null;
 //       System.out.println("改点击事件耗时时间（ms）："+(DateUtils.getCurrentMillisecond()-time1));
@@ -248,17 +252,25 @@ public class BaseApp {
     /**
      * 前进、后退、刷新的动作
      */
-    public void operation(AndroidDriver driver,String operation ){
-
-        if (operation.equals("forward")){
-            // 前进
-            driver.navigate().forward();
-        }else if (operation.equals("back")){
-            // 后退
+    public void operation(AndroidDriver driver,String operation,int number )  {
+        for (int i=0;i <number;i++){
+            if (operation.equals("forward")){
+                // 前进
+                driver.navigate().forward();
+            }else if (operation.equals("back")){
+                // 后退
+                driver.navigate().back();
+            }else {
+                // 刷新
+                driver.navigate().refresh();
+            }
+            i++;
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             driver.navigate().back();
-        }else {
-            // 刷新
-            driver.navigate().refresh();
         }
     }
     // todo : 页面中其他的最基本操作，可自行封装

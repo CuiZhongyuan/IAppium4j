@@ -48,8 +48,8 @@ public class EnterYynElemnt extends BaseApp{
         }
         //点击取消按钮
         clickButton(driver,ResourceIDData.CANCLE);
-        driver.navigate().back();
-        driver.navigate().back();
+        //后退2次
+        operation(driver,"back",2);
     }
     //点击登录至微信授权
     public void weixinLogin(AndroidDriver driver) {
@@ -63,23 +63,23 @@ public class EnterYynElemnt extends BaseApp{
             //返回首页
             clickButton(driver, ResourceIDData.SHOUYEID);
     }
-//    //门票下单流程
-//    public void ticketCase(AndroidDriver driver) {
-//        //返回首页
-//        clickButton(driver, ResourceIDData.SHOUYEID);
-//        popupClick(driver);
-//        clickButton(driver,ResourceIDData.AREA);
-//        sendInput(driver,ResourceIDData.SEARCH, SendKeyData.KM);
-//        //展开列表
-//        clickButton(driver,ResourceIDData.ZHANGKAI);
-//        //调转门票列表详情
-//        clickButton(driver,ResourceIDData.TICKETLIST);
-//        swipeToDown(driver);
-//        //点击预订
-//        clickButton(driver,ResourceIDData.TICKET);
-//        sendInput(driver,XPathData.NAMEID,SendKeyData.NAME);
-//        sendInput(driver,XPathData.PHONE,SendKeyData.PHONE);
-//        //提交订单
-//        clickButton(driver,XPathData.SUBMIT);
-//    }
+    //门票下单流程
+    public void ticketCase(AndroidDriver driver) {
+        //返回首页
+        clickButton(driver, ResourceIDData.SHOUYEID);
+        popupClick(driver);
+        clickButton(driver,ResourceIDData.AREA);
+        sendInput(driver,ResourceIDData.SEARCH, SendKeyData.KM);
+        //展开列表
+        clickButton(driver,ResourceIDData.ZHANGKAI);
+        //调转门票列表详情
+        clickButton(driver,ResourceIDData.TICKETLIST);
+        swipeToDown(driver);
+        //点击预订
+        clickButton(driver,ResourceIDData.TICKET);
+        sendInput(driver,XPathData.NAMEID,SendKeyData.NAME);
+        sendInput(driver,XPathData.PHONE,SendKeyData.PHONE);
+        //提交订单
+        clickButton(driver,XPathData.SUBMIT);
+    }
 }

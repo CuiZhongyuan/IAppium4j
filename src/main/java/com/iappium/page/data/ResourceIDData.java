@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 public class ResourceIDData {
     //我的resoiuorce_id
-    public static final By MYID = By.id("com.tengyun.yyn:id/navigation_mine_img");
+    public static final By MYID = By.id("com.tengyun.yyn:id/navigation_mine_activity_img");
     //首页id
     public static final By SHOUYEID = By.id("com.tengyun.yyn:id/navigation_home_img");
     //微信授权图标id

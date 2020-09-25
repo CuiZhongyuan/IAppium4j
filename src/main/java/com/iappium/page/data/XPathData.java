@@ -1,7 +1,7 @@
 package com.iappium.page.data;
-
+import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.support.FindBy;
 public class XPathData {
     //点击登录按钮
     public static final By LOGIN = By.xpath("//android.widget.TextView[@text=\"登录/注册\"]");
@@ -12,4 +12,11 @@ public class XPathData {
     public static final By NAMEID = By.id("//android.widget.EditText[@text=\"请填写出行人姓名\"]");
     public static final By PHONE = By.id("//android.widget.EditText[@text=\"填写手机号码接收确认短信\"]");
     public static final By SUBMIT = By.id(" //android.widget.TextView[@text=\"提交订单\"]");
+//
+//    @FindBy(xpath = "//android.widget.TextView[@text=\"登录/注册\"]")
+//    public static  By LOGIN ;
+//    @FindBy(xpath = "//android.widget.TextView[@text='后台环境(需重启):']")
+//    public static By ENV;
+//    @FindBy(xpath = "//android.widget.CheckedTextView[@text='测试环境']")
+//    public static By CESHI;
 }

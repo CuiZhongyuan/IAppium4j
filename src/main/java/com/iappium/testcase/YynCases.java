@@ -20,6 +20,6 @@ public class YynCases extends BaseTest {
         //微信授权login
         enterMiniElemnt.weixinLogin(driver);
         //门票下单业务流程
-//        enterMiniElemnt.ticketCase(driver);
+        enterMiniElemnt.ticketCase(driver);
     }
 }
