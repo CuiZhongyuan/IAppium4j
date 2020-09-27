@@ -82,7 +82,6 @@ public class BaseApp {
         }
         return null;
     }
-
     /**
      * 点击元素
      *
@@ -252,26 +251,18 @@ public class BaseApp {
     /**
      * 前进、后退、刷新的动作
      */
-    public void operation(AndroidDriver driver,String operation,int number )  {
-        for (int i=0;i <number;i++){
+    public void operation(AndroidDriver driver,String operation )  {
             if (operation.equals("forward")){
                 // 前进
                 driver.navigate().forward();
             }else if (operation.equals("back")){
                 // 后退
+                log.info("后退点击");
                 driver.navigate().back();
             }else {
                 // 刷新
                 driver.navigate().refresh();
             }
-            i++;
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            driver.navigate().back();
-        }
     }
     // todo : 页面中其他的最基本操作，可自行封装
 

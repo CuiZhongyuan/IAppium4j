@@ -34,7 +34,7 @@ public class BaseAndroidDriver {
         capabilities.setCapability("unicodeKeyboard", "True");
         // 不重新签名apk
         capabilities.setCapability("resetKeyboard", "True");
-        capabilities.setCapability("chromedriverExecutable",baseConfig.getChromeDriverPath());
+//        capabilities.setCapability("chromedriverExecutable",baseConfig.getChromeDriverPath());
         // 通过本地 appium 服务开启 driver
         URL url = null;
         try {

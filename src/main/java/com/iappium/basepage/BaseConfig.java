@@ -37,7 +37,7 @@ public class BaseConfig {
     /**
      * 自动化测试引擎
      */
-    private String automationName="Appium";
+    private String automationName="uiautomator1";
 
     /**
      * hub ip 地址

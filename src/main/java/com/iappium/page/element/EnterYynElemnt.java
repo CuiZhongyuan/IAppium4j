@@ -6,12 +6,11 @@ import com.iappium.page.data.PopupData;
 import com.iappium.page.data.ResourceIDData;
 import com.iappium.page.data.SendKeyData;
 import com.iappium.page.data.XPathData;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 /**
@@ -22,12 +21,17 @@ import java.util.List;
  */
 @Slf4j
 public class EnterYynElemnt extends BaseApp{
+
+    @FindBy(id = "com.tengyun.yyn:id/layout_confirm_cancel")
+    private WebElement aa;
+
     /**
      * 继承BaseApp使用公共封装方法
      * */
     //点击弹框
     public void popupClick(AndroidDriver driver) {
         //使用封装By类型元素定位，且数据和元素分离
+        log.info("点击弹框");
         clickButton( driver, PopupData.POPUP1);
     }
     //点击环境选择至测试环境
@@ -49,7 +53,9 @@ public class EnterYynElemnt extends BaseApp{
         //点击取消按钮
         clickButton(driver,ResourceIDData.CANCLE);
         //后退2次
-        operation(driver,"back",2);
+        for (int i=0;i<2;i++){
+            operation(driver,"back");
+        }
     }
     //点击登录至微信授权
     public void weixinLogin(AndroidDriver driver) {
