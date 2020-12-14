@@ -17,6 +17,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestResult;
 
 import java.io.IOException;
@@ -32,7 +35,9 @@ import java.util.Set;
  * @date 2020/8/1 23:28
  */
 @Slf4j
-public class BaseApp {
+@Component
+@SpringBootTest
+public class BaseApp  extends AbstractTestNGSpringContextTests {
     /**
      * 持续时间，单位秒
      */
@@ -52,18 +57,13 @@ public class BaseApp {
      */
     BaseAndroidDriver baseAndroidDriver;
     /**
-     * 启动被测机参数配置
-     */
-    BaseConfig baseConfig;
-    /**
      * 构造方法
      */
     public BaseApp() {
     }
 
-    public BaseApp(BaseAndroidDriver androidDriver, BaseConfig baseConfig) {
+    public BaseApp(BaseAndroidDriver androidDriver) {
         this.baseAndroidDriver = androidDriver;
-        this.baseConfig = baseConfig;
     }
 
     /*============================== 基本元素操作 ==============================*/
@@ -126,13 +126,25 @@ public class BaseApp {
      *
      * @return MobileDriver
      */
-    public MobileDriver<WebElement> switchWebView() {
-       baseAndroidDriver.getDriver(baseConfig).getContextHandles().forEach((context) -> {
-            if (context.contains("WEBVIEW")) {
-                baseAndroidDriver.getDriver(baseConfig).context(context);
+    public void switchWebView(AndroidDriver driver,String text) {
+        // 获取到所有的contexts，并在启动参数里配置
+        System.out.println("所有的contexts:" + driver.getContextHandles());
+        // 切换到小程序webview对应的context中
+        driver.context("WEBVIEW_com.tencent.mm:appbrand0");
+        System.out.println("切换context成功！");
+        // 获取到所有的handles
+        Set<String> windowHandles = driver.getWindowHandles();
+        System.out.println("所有的windowsHandles" + windowHandles);
+        for (String handle :windowHandles){
+            System.out.println("切换到对应的windowHandle：" + handle);
+            driver.switchTo().window(handle);
+            if(driver.getPageSource().contains(text)){
+                //找到了对应的窗口,退出循环
+                break;
+            }else {
+                System.out.println("查询的："+text+"页面可能不包含该文本信息");
             }
-        });
-        return baseAndroidDriver.getDriver(baseConfig);
+        }
     }
 
     /**
@@ -142,15 +154,15 @@ public class BaseApp {
      */
     public MobileDriver<WebElement> switchNextWindow() {
         // 当前窗口句柄
-        String currentHandle = baseAndroidDriver.getDriver(baseConfig).getWindowHandle();
+        String currentHandle = baseAndroidDriver.getDriver().getWindowHandle();
         // 所有窗口句柄
-        Set<String> allHandlesSet = baseAndroidDriver.getDriver(baseConfig).getWindowHandles();
+        Set<String> allHandlesSet = baseAndroidDriver.getDriver().getWindowHandles();
         for (String window : allHandlesSet) {
             if (!currentHandle.equals(window)) {
-                baseAndroidDriver.getDriver(baseConfig).switchTo().window(window);
+                baseAndroidDriver.getDriver().switchTo().window(window);
             }
         }
-        return baseAndroidDriver.getDriver(baseConfig);
+        return baseAndroidDriver.getDriver();
     }
 
     /**
@@ -159,12 +171,12 @@ public class BaseApp {
      * @return MobileDriver
      */
     public MobileDriver<WebElement> switchOutWebView() {
-        baseAndroidDriver.getDriver(baseConfig).getContextHandles().forEach((context) -> {
+        baseAndroidDriver.getDriver().getContextHandles().forEach((context) -> {
             if (context.contains("NATIVE_APP")) {
-                baseAndroidDriver.getDriver(baseConfig).context(context);
+                baseAndroidDriver.getDriver().context(context);
             }
         });
-        return baseAndroidDriver.getDriver(baseConfig);
+        return baseAndroidDriver.getDriver();
     }
 
     /*============================== 页面滑动操作 ==============================*/
@@ -185,6 +197,7 @@ public class BaseApp {
      *向上滑动操作
      */
     public void swipeToUp(AndroidDriver driver) {
+        wait = new WebDriverWait(driver,20);
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
         TouchAction action=new TouchAction(driver).press(PointOption.point(width/2, height*3/4)).waitAction(WaitOptions.waitOptions(duration))
@@ -200,11 +213,17 @@ public class BaseApp {
         TouchAction action=new TouchAction(driver).press(PointOption.point(width/2, height/4)).waitAction(WaitOptions.waitOptions(duration))
                 .moveTo(PointOption.point(width/2, height*3/4)).release();
         action.perform();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     /**
      *向左滑动操作
      */
     public void swipeToLeft(AndroidDriver driver) {
+        wait = new WebDriverWait(driver,20);
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
         TouchAction action=new TouchAction(driver).press(PointOption.point(width*3/4, height/2)).waitAction(WaitOptions.waitOptions(duration))
@@ -215,6 +234,7 @@ public class BaseApp {
      *向右滑动操作
      */
     public void swipeToRight(AndroidDriver driver) {
+        wait = new WebDriverWait(driver,20);
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
         TouchAction action=new TouchAction(driver).press(PointOption.point(width / 4, height / 2)).waitAction(WaitOptions.waitOptions(duration))
@@ -230,10 +250,9 @@ public class BaseApp {
         /**设置显示等待时间10s  driver=baseAndroidDriver.getDriver(baseConfig)
         特注：显示等待与隐式等待相对，显示等待必须在每一个需要等待的元素前面进行声明，如果在规定的时间内找到元素，则直接执行，即找到元素就执行相关操作
          */
-        wait = new WebDriverWait(driver,5);
+        wait = new WebDriverWait(driver,20);
         //tap点击坐标，输入坐标，然后再release()释放坐标点，用perform()去执行一系列action操作
         action = new TouchAction(driver).tap(PointOption.point(x,y)).release().perform();
-
     }
     /**
      * 通过adb命令驱动被测设备
@@ -241,7 +260,7 @@ public class BaseApp {
     public void adbInput(AndroidDriver driver ,String input){
         try {
             Process process = Runtime.getRuntime().exec(input);
-            wait = new WebDriverWait(driver,5);
+            wait = new WebDriverWait(driver,20);
             process.destroy();
         } catch (IOException e) {
             e.printStackTrace();
@@ -252,6 +271,7 @@ public class BaseApp {
      * 前进、后退、刷新的动作
      */
     public void operation(AndroidDriver driver,String operation )  {
+        wait = new WebDriverWait(driver,20);
             if (operation.equals("forward")){
                 // 前进
                 driver.navigate().forward();

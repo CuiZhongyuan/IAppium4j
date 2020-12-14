@@ -12,8 +12,8 @@ public class BasePage extends BaseApp {
     public BasePage() {
     }
 
-    public BasePage(BaseAndroidDriver androidDriver, BaseConfig baseConfig) {
-        super(androidDriver, baseConfig);
+    public BasePage(BaseAndroidDriver androidDriver) {
+        super(androidDriver);
     }
 
     /*============================== 页面可共用的操作 ==============================*/
