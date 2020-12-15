@@ -1,4 +1,4 @@
-import com.iappium.page.data.XPathData;
+
 import com.iappium.utils.BaseTestngInit;
 import com.iappium.utils.WordartDisplayer;
 import org.testng.annotations.Test;
@@ -15,10 +15,5 @@ public class RunCasesAll {
         //执行测试用例入口
         BaseTestngInit baseTestngInit = new BaseTestngInit();
         baseTestngInit.baseTestngInitCode();
-    }
-
-    @Test
-    public void testfind(){
-        System.out.println(XPathData.CESHITest);
     }
 }

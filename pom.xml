@@ -16,7 +16,7 @@
     <properties>
         <!-- 各依赖版本信息 -->
         <lombok.version>1.18.12</lombok.version>
-        <junit5.version>5.7.0-M1</junit5.version>
+<!--        <junit5.version>5.7.0-M1</junit5.version>-->
         <testng.version>6.14.3</testng.version>
         <appium.version>6.1.0</appium.version>
         <allure2.version>2.13.5</allure2.version>
@@ -72,18 +72,18 @@
             <version>${lombok.version}</version>
         </dependency>
         <!-- junit 5 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter</artifactId>-->
+<!--            <version>${junit5.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter-api</artifactId>-->
+<!--            <version>${junit5.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <!-- testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -137,11 +137,11 @@
             <version>${poi.version}</version>
         </dependency>
         <!-- httpclient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${httpclient.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--            <version>${httpclient.version}</version>-->
+<!--        </dependency>-->
         <!-- gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -169,7 +169,32 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.14.3</version>
-            <scope>compile</scope>
+        </dependency>
+        <!--引入数据库依赖-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.15.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.4.15.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.22</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.2.0.M4</version>
         </dependency>
     </dependencies>
     <build>
