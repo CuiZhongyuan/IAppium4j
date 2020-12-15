@@ -1,0 +1,14 @@
+<Pages>
+<!--小程序使用webview定位，定义一个page对象，对应web系统中某个页面-->
+    <Page keyword="首页">
+        <!-- 定义UIElement对象，对应该页面上的每个元素-->
+        <!--keyword:页面元素的关键字，by：定位元素的方法，value:选择器的值-->
+        <UIElement keyword="点击模拟试卷" by="cssSelector" value="[src='/static/img/home/p-index-mryl.svg']"></UIElement>
+<!--        <UIElement keyword="点击低电压作业" by="cssSelector" value="[class='typeText]"></UIElement>-->
+<!--        <UIElement keyword="搜索结果" by="xpath" value="//div[contains(text(),'防静电的接地电')]"></UIElement>-->
+    </Page>
+    <Page keyword="腾讯课堂">
+        <UIElement keyword="分类" by="cssSelector" value="[src='/assets/img/cate.png']"></UIElement>
+        <UIElement></UIElement>
+    </Page>
+</Pages>
