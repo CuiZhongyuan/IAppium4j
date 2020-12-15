@@ -8,8 +8,6 @@ package com.iappium.utils;
  * @date 2020/8/1 23:30
  */
 
-import com.iappium.basepage.BaseAndroidDriver;
-import com.iappium.basepage.BaseConfig;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +16,6 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * 截图工具

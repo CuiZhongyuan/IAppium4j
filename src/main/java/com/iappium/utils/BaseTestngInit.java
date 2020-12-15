@@ -1,6 +1,5 @@
 package com.iappium.utils;
 
-import com.iappium.listener.ExtentTestNGIReporterListener;
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
@@ -19,13 +18,11 @@ public class BaseTestngInit {
     public  void baseTestngInitCode()  {
         //创建testng对象
         TestNG testng = new TestNG();
-        //创建报告监听器对象
-        ExtentTestNGIReporterListener reportListener = new ExtentTestNGIReporterListener();
 //        TestLogListener testLogListener = new TestLogListener();
         //设置需要执行的测试用例类
         testng.setTestClasses(new Class[] { com.iappium.testcase.YynCases.class});
         //添加监听器
-        testng.addListener(reportListener);
+//        testng.addListener();
 //        testng.addListener(testLogListener);
         //运行测试
         testng.run();
